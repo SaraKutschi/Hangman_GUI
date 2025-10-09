@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="HangmanForm">
+  <grid id="27dc6" binding="MainPanel" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="5" left="5" bottom="5" right="5"/>
+    <constraints>
+      <xy x="20" y="20" width="622" height="504"/>
+    </constraints>
+    <properties>
+      <background color="-3280641"/>
+      <foreground color="-263169"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <grid id="e3092" binding="GamePanel" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="10" left="10" bottom="10" right="10"/>
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-5261896"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <grid id="fd836" binding="LetterPanel" layout-manager="GridLayoutManager" row-count="4" column-count="7" same-size-horizontally="false" same-size-vertically="false" hgap="5" vgap="5">
+            <margin top="2" left="2" bottom="2" right="2"/>
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-5261896"/>
+              <enabled value="true"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="5b56b" class="javax.swing.JButton" binding="hBtn">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-9801870"/>
+                  <font name="Arial Black" size="12" style="1"/>
+                  <foreground color="-263169"/>
+                  <horizontalTextPosition value="0"/>
+                  <inheritsPopupMenu value="false"/>
+                  <label value="H"/>
+                  <text value="H"/>
+                  <verticalTextPosition value="0"/>
+                </properties>
+              </component>
+              <component id="d1247" class="javax.swing.JButton" binding="aBtn">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-9801870"/>
+                  <font name="Arial Black" size="12" style="1"/>
+                  <foreground color="-263169"/>
+                  <horizontalTextPosition value="0"/>
+                  <inheritsPopupMenu value="false"/>
+                  <label value="A"/>
+                  <text value="A"/>
+                  <verticalTextPosition value="0"/>
+                </properties>
+              </component>
+              <component id="965a" class="javax.swing.JButton" binding="oBtn">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-9801870"/>
+                  <font name="Arial Black" size="12" style="1"/>
+                  <foreground color="-263169"/>
+                  <horizontalTextPosition value="0"/>
+                  <inheritsPopupMenu value="false"/>
+                  <label value="O"/>
+                  <text value="O"/>
+                  <verticalTextPosition value="0"/>
+                </properties>
+              </component>
+              <component id="82b1b" class="javax.swing.JButton" binding="iBtn">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-9801870"/>
+                  <font name="Arial Black" size="12" style="1"/>
+                  <foreground color="-263169"/>
+                  <horizontalTextPosition value="0"/>
+                  <inheritsPopupMenu value="false"/>
+                  <label value="I"/>
+                  <text value="I"/>
+                  <verticalTextPosition value="0"/>
+                </properties>
+              </component>
+              <component id="12e34" class="javax.swing.JButton" binding="pBtn">
+                <constraints>
+                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-9801870"/>
+                  <font name="Arial Black" size="12" style="1"/>
+                  <foreground color="-263169"/>
+                  <horizontalTextPosition value="0"/>
+                  <inheritsPopupMenu value="false"/>
+                  <label value="P"/>
+                  <text value="P"/>
+                  <verticalTextPosition value="0"/>
+                </properties>
+              </component>
+              <component id="a9f" class="javax.swing.JButton" binding="bBtn">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-9801870"/>
+                  <font name="Arial Black" size="12" style="1"/>
+                  <foreground color="-263169"/>
+                  <horizontalTextPosition value="0"/>
+                  <inheritsPopupMenu value="false"/>
+                  <label value="B"/>
+                  <text value="B"/>
+                  <verticalTextPosition value="0"/>
+                </properties>
+              </component>
+              <component id="53dcc" class="javax.swing.JButton" binding="vBtn">
+                <constraints>
+                  <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-9801870"/>
+                  <font name="Arial Black" size="12" style="1"/>
+                  <foreground color="-263169"/>
+                  <horizontalTextPosition value="0"/>
+                  <inheritsPopupMenu value="false"/>
+                  <label value="V"/>
+                  <text value="V"/>
+                  <verticalTextPosition value="0"/>
+                </properties>
+              </component>
+              <component id="95f8f" class="javax.swing.JButton" binding="jBtn">
+                <constraints>
+                  <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-9801870"/>
+                  <font name="Arial Black" size="12" style="1"/>
+                  <foreground color="-263169"/>
+                  <horizontalTextPosition value="0"/>
+                  <inheritsPopupMenu value="false"/>
+                  <label value="J"/>
+                  <text value="J"/>
+                  <verticalTextPosition value="0"/>
+                </properties>
+              </component>
+              <component id="4ae65" class="javax.swing.JButton" binding="qBtn">
+                <constraints>
+                  <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-9801870"/>
+                  <font name="Arial Black" size="12" style="1"/>
+                  <foreground color="-263169"/>
+                  <horizontalTextPosition value="0"/>
+                  <inheritsPopupMenu value="false"/>
+                  <label value="Q"/>
+                  <text value="Q"/>
+                  <verticalTextPosition value="0"/>
+                </properties>
+              </component>
+              <component id="6aa63" class="javax.swing.JButton" binding="wBtn">
+                <constraints>
+                  <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-9801870"/>
+                  <font name="Arial Black" size="12" style="1"/>
+                  <foreground color="-263169"/>
+                  <horizontalTextPosition value="0"/>
+                  <inheritsPopupMenu value="false"/>
+                  <label value="W"/>
+                  <text value="W"/>
+                  <verticalTextPosition value="0"/>
+                </properties>
+              </component>
+              <component id="c3536" class="javax.swing.JButton" binding="cBtn">
+                <constraints>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-9801870"/>
+                  <font name="Arial Black" size="12" style="1"/>
+                  <foreground color="-263169"/>
+                  <horizontalTextPosition value="0"/>
+                  <inheritsPopupMenu value="false"/>
+                  <label value="C"/>
+                  <text value="C"/>
+                  <verticalTextPosition value="0"/>
+                </properties>
+              </component>
+              <component id="3c8b" class="javax.swing.JButton" binding="kBtn">
+                <constraints>
+                  <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-9801870"/>
+                  <font name="Arial Black" size="12" style="1"/>
+                  <foreground color="-263169"/>
+                  <horizontalTextPosition value="0"/>
+                  <inheritsPopupMenu value="false"/>
+                  <label value="K"/>
+                  <text value="K"/>
+                  <verticalTextPosition value="0"/>
+                </properties>
+              </component>
+              <component id="ddb1a" class="javax.swing.JButton" binding="rBtn">
+                <constraints>
+                  <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-9801870"/>
+                  <font name="Arial Black" size="12" style="1"/>
+                  <foreground color="-263169"/>
+                  <horizontalTextPosition value="0"/>
+                  <inheritsPopupMenu value="false"/>
+                  <label value="R"/>
+                  <text value="R"/>
+                  <verticalTextPosition value="0"/>
+                </properties>
+              </component>
+              <component id="1ee6e" class="javax.swing.JButton" binding="lBtn">
+                <constraints>
+                  <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-9801870"/>
+                  <font name="Arial Black" size="12" style="1"/>
+                  <foreground color="-263169"/>
+                  <horizontalTextPosition value="0"/>
+                  <inheritsPopupMenu value="false"/>
+                  <label value="L"/>
+                  <text value="L"/>
+                  <verticalTextPosition value="0"/>
+                </properties>
+              </component>
+              <component id="d0e8d" class="javax.swing.JButton" binding="sBtn">
+                <constraints>
+                  <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-9801870"/>
+                  <font name="Arial Black" size="12" style="1"/>
+                  <foreground color="-263169"/>
+                  <horizontalTextPosition value="0"/>
+                  <inheritsPopupMenu value="false"/>
+                  <label value="S"/>
+                  <text value="S"/>
+                  <verticalTextPosition value="0"/>
+                </properties>
+              </component>
+              <component id="63e85" class="javax.swing.JButton" binding="mbtn">
+                <constraints>
+                  <grid row="1" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-9801870"/>
+                  <font name="Arial Black" size="12" style="1"/>
+                  <foreground color="-263169"/>
+                  <horizontalTextPosition value="0"/>
+                  <inheritsPopupMenu value="false"/>
+                  <label value="M"/>
+                  <text value="M"/>
+                  <verticalTextPosition value="0"/>
+                </properties>
+              </component>
+              <component id="3f55e" class="javax.swing.JButton" binding="tBtn">
+                <constraints>
+                  <grid row="2" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-9801870"/>
+                  <font name="Arial Black" size="12" style="1"/>
+                  <foreground color="-263169"/>
+                  <horizontalTextPosition value="0"/>
+                  <inheritsPopupMenu value="false"/>
+                  <label value="T"/>
+                  <text value="T"/>
+                  <verticalTextPosition value="0"/>
+                </properties>
+              </component>
+              <component id="3872b" class="javax.swing.JButton" binding="dBtn">
+                <constraints>
+                  <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-9801870"/>
+                  <font name="Arial Black" size="12" style="1"/>
+                  <foreground color="-263169"/>
+                  <horizontalTextPosition value="0"/>
+                  <inheritsPopupMenu value="false"/>
+                  <label value="D"/>
+                  <text value="D"/>
+                  <verticalTextPosition value="0"/>
+                </properties>
+              </component>
+              <component id="2b178" class="javax.swing.JButton" binding="eBtn">
+                <constraints>
+                  <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-9801870"/>
+                  <font name="Arial Black" size="12" style="1"/>
+                  <foreground color="-263169"/>
+                  <horizontalTextPosition value="0"/>
+                  <inheritsPopupMenu value="false"/>
+                  <label value="E"/>
+                  <text value="E"/>
+                  <verticalTextPosition value="0"/>
+                </properties>
+              </component>
+              <component id="7a895" class="javax.swing.JButton" binding="fBtn">
+                <constraints>
+                  <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-9801870"/>
+                  <font name="Arial Black" size="12" style="1"/>
+                  <foreground color="-263169"/>
+                  <horizontalTextPosition value="0"/>
+                  <inheritsPopupMenu value="false"/>
+                  <label value="F"/>
+                  <text value="F"/>
+                  <verticalTextPosition value="0"/>
+                </properties>
+              </component>
+              <component id="436c8" class="javax.swing.JButton" binding="gBtn">
+                <constraints>
+                  <grid row="0" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-9801870"/>
+                  <font name="Arial Black" size="12" style="1"/>
+                  <foreground color="-263169"/>
+                  <horizontalTextPosition value="0"/>
+                  <inheritsPopupMenu value="false"/>
+                  <label value="G"/>
+                  <text value="G"/>
+                  <verticalTextPosition value="0"/>
+                </properties>
+              </component>
+              <component id="4b646" class="javax.swing.JButton" binding="nBtn">
+                <constraints>
+                  <grid row="1" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-9801870"/>
+                  <font name="Arial Black" size="12" style="1"/>
+                  <foreground color="-263169"/>
+                  <horizontalTextPosition value="0"/>
+                  <inheritsPopupMenu value="false"/>
+                  <label value="N"/>
+                  <text value="N"/>
+                  <verticalTextPosition value="0"/>
+                </properties>
+              </component>
+              <component id="5bfba" class="javax.swing.JButton" binding="uBtn">
+                <constraints>
+                  <grid row="2" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-9801870"/>
+                  <font name="Arial Black" size="12" style="1"/>
+                  <foreground color="-263169"/>
+                  <horizontalTextPosition value="0"/>
+                  <inheritsPopupMenu value="false"/>
+                  <label value="U"/>
+                  <text value="U"/>
+                  <verticalTextPosition value="0"/>
+                </properties>
+              </component>
+              <component id="a320d" class="javax.swing.JButton" binding="xBtn">
+                <constraints>
+                  <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-9801870"/>
+                  <font name="Arial Black" size="12" style="1"/>
+                  <foreground color="-263169"/>
+                  <horizontalTextPosition value="0"/>
+                  <inheritsPopupMenu value="false"/>
+                  <label value="X"/>
+                  <text value="X"/>
+                  <verticalTextPosition value="0"/>
+                </properties>
+              </component>
+              <component id="7d59" class="javax.swing.JButton" binding="yBtn">
+                <constraints>
+                  <grid row="3" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-9801870"/>
+                  <font name="Arial Black" size="12" style="1"/>
+                  <foreground color="-263169"/>
+                  <horizontalTextPosition value="0"/>
+                  <inheritsPopupMenu value="false"/>
+                  <label value="Y"/>
+                  <text value="Y"/>
+                  <verticalTextPosition value="0"/>
+                </properties>
+              </component>
+              <component id="242ad" class="javax.swing.JButton" binding="zBtn">
+                <constraints>
+                  <grid row="3" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-9801870"/>
+                  <font name="Arial Black" size="12" style="1"/>
+                  <foreground color="-263169"/>
+                  <horizontalTextPosition value="0"/>
+                  <inheritsPopupMenu value="false"/>
+                  <label value="Z"/>
+                  <text value="Z"/>
+                  <verticalTextPosition value="0"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="5bc5d" binding="ImagePanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-263169"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="c7b95" class="javax.swing.JLabel" binding="imageLbl">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="-1" height="300"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <text value=""/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="46bd0" binding="InfoPanel" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="8dfbb" class="javax.swing.JLabel" binding="wordLbl">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value=""/>
+                </properties>
+              </component>
+              <component id="b0937" class="javax.swing.JLabel" binding="failLbl">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Fehler:"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+        </children>
+      </grid>
+      <grid id="666f1" binding="HeaderPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="10" vgap="10">
+        <margin top="15" left="15" bottom="15" right="15"/>
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <maximum-size width="-1" height="100"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-9259521"/>
+          <font name="Arial Black" size="26" style="1"/>
+          <foreground color="-263169"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="1bec4" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Arial Black" size="22" style="1"/>
+              <foreground color="-263169"/>
+              <text value="Hangman"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>
