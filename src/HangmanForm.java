@@ -13,21 +13,32 @@ public class HangmanForm {
     private JLabel wordLbl;
     private JLabel failLbl;
 
-    // Logic
     private final Game game = new Game();
 
     private JLabel imageLbl;
-    private ImageIcon[] hangmanImages; 
+    private ImageIcon[] hangmanImages;
+
+    // === kompaktere Konstanten ===
+    private static final int IMG_MAX_W = 300;
+    private static final int IMG_MAX_H = 200;
+    private static final int FRAME_W = 400;
+    private static final int FRAME_H = 450;
 
     public HangmanForm() {
-        // === Bildbereich ===
         imageLbl = new JLabel("", SwingConstants.CENTER);
         ImagePanel.setLayout(new BorderLayout());
         ImagePanel.add(imageLbl, BorderLayout.CENTER);
+        ImagePanel.setPreferredSize(new Dimension(IMG_MAX_W, IMG_MAX_H));
 
-        hangmanImages = new ImageIcon[12]; // 0..11
+        MainPanel.setPreferredSize(new Dimension(FRAME_W, FRAME_H));
+
+        wordLbl.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        failLbl.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+
+        // === Bilder laden ===
+        hangmanImages = new ImageIcon[12];
         for (int i = 0; i < hangmanImages.length; i++) {
-            String path = "/Images/hangman" + i + ".jpg";
+            String path = "/Image/hangman" + i + ".jpeg";
             var url = getClass().getResource(path);
             hangmanImages[i] = (url != null) ? new ImageIcon(url) : null;
         }
@@ -36,23 +47,41 @@ public class HangmanForm {
         failLbl.setText("Fehler: 0 / " + game.getMaxFails());
         setHangmanImage(game.getFails());
 
+        // === kompaktere Buchstabenbuttons ===
         wireLetterButtons();
+        LetterPanel.setLayout(new GridLayout(3, 9, 4, 4)); // dichter gepackt
+        for (Component c : LetterPanel.getComponents()) {
+            if (c instanceof JButton btn) {
+                btn.setFont(new Font("Segoe UI", Font.BOLD, 12));
+                btn.setPreferredSize(new Dimension(35, 28));
+                btn.setMargin(new Insets(1, 4, 1, 4));
+            }
+        }
 
         ImagePanel.addComponentListener(new java.awt.event.ComponentAdapter() {
-            @Override public void componentResized(java.awt.event.ComponentEvent e) {
+            @Override
+            public void componentResized(java.awt.event.ComponentEvent e) {
                 setHangmanImage(game.getFails());
             }
         });
     }
 
-    // Skaliert passend ins Panel
+    // === kleinere Bildskalierung ===
     private void setHangmanImage(int fails) {
-        int idx = Math.max(0, Math.min(fails, hangmanImages.length - 1)); // 0..11
+        int idx = Math.max(0, Math.min(fails, hangmanImages.length - 1));
         ImageIcon icon = hangmanImages[idx];
         if (icon == null) { imageLbl.setIcon(null); return; }
 
-        int w = Math.max(1, ImagePanel.getWidth() == 0 ? 250 : ImagePanel.getWidth());
-        int h = Math.max(1, ImagePanel.getHeight() == 0 ? 250 : ImagePanel.getHeight());
+        int panelW = Math.min(ImagePanel.getWidth(), IMG_MAX_W);
+        int panelH = Math.min(ImagePanel.getHeight(), IMG_MAX_H);
+
+        int imgW = icon.getIconWidth();
+        int imgH = icon.getIconHeight();
+
+        double scale = Math.min(panelW / (double) imgW, panelH / (double) imgH);
+        int w = (int) (imgW * scale);
+        int h = (int) (imgH * scale);
+
         Image scaled = icon.getImage().getScaledInstance(w, h, Image.SCALE_SMOOTH);
         imageLbl.setIcon(new ImageIcon(scaled));
     }
@@ -70,7 +99,7 @@ public class HangmanForm {
             char letter = (char) pair[1];
             if (btn != null) {
                 btn.addActionListener(e -> {
-                    btn.setEnabled(false); // nicht doppelt raten
+                    btn.setEnabled(false);
                     handleGuess(letter);
                 });
             }
@@ -80,18 +109,14 @@ public class HangmanForm {
     private void handleGuess(char letter) {
         boolean correct = game.guessLetter(letter);
 
-        // Labels updaten
         wordLbl.setText(game.getGuessedWord());
         failLbl.setText("Fehler: " + game.getFails() + " / " + game.getMaxFails());
-
-        // Bild updaten
         setHangmanImage(game.getFails());
 
-        // Ende checken
         if (game.isGameOver()) {
             disableAllLetterButtons();
             JOptionPane.showMessageDialog(MainPanel,
-                    game.hasWon() ? "Du hast gewonnen 🎉" : "Leider verloren 😢",
+                    game.hasWon() ? "Du hast gewonnen!" : "Leider verloren!",
                     "Hangman", JOptionPane.INFORMATION_MESSAGE);
         }
     }
@@ -105,4 +130,5 @@ public class HangmanForm {
     public JPanel getMainPanel() {
         return MainPanel;
     }
+
 }
