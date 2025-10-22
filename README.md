@@ -64,10 +64,10 @@ Ein kleines Java-Projekt mit grafischer Oberfläche: ein **Hangman-Spiel**, erst
 ## Ergebnis
 
 ### 🎮 Spielansicht
-![Hangman Gameplay](./Image/Screenshot_2025-10-22_123707.jpg)
+![Hangman Gameplay](./Screenshots/Game.jpg)
 
 ### ⚙️ Einstellungen-Fenster
-![Settings Dialog](./Image/Screenshot_2025-10-22_123741.jpg)
+![Settings Dialog](./Screenshots/Settings.jpg)
 
 ### 🧩 IntelliJ GUI Designer
-![GUI Designer Ansicht](./Image/GUI_Form.jpg)
+![GUI Designer Ansicht](./Screenshots/GUI_Form.jpg)
