@@ -7,7 +7,9 @@ public class Game {
             "CODE", "DEBUG", "PIXEL", "KI", "SCHULE"
     );
 
-    private static final int MAX_FAILS = 11;
+    // war: static final int MAX_FAILS = 11;
+    // jetzt: pro-Instanz konfigurierbar
+    private int maxFails = 11;
 
     // === Attribute ===
     private String word;
@@ -44,29 +46,31 @@ public class Game {
         return spaced.toString().trim();
     }
 
-    public String getGuessedWord() {
-        return formatGuessedWord();
-    }
+    public String getGuessedWord() { return formatGuessedWord(); }
 
     public boolean isGameOver() {
-        return fails >= MAX_FAILS || hasWon();
+        return fails >= maxFails || hasWon();
     }
 
     public boolean hasWon() {
         return guessed.toString().equals(word);
     }
 
-    public int getFails() {
-        return fails;
+    public int getFails() { return fails; }
+
+    public int getMaxFails() { return maxFails; }
+
+    public void setMaxFails(int newMax) {
+        // simple bounds, feel free to tweak
+        if (newMax < 1) newMax = 1;
+        if (newMax > 20) newMax = 20;
+        this.maxFails = newMax;
+
+        // falls man mitten im Spiel erhöht/verringert:
+        if (fails > maxFails) fails = maxFails;
     }
 
-    public int getMaxFails() {
-        return MAX_FAILS;
-    }
-
-    public String getWord() {
-        return word;
-    }
+    public String getWord() { return word; }
 
     public void reset() {
         fails = 0;
