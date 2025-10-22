@@ -7,8 +7,6 @@ public class Game {
             "CODE", "DEBUG", "PIXEL", "KI", "SCHULE"
     );
 
-    // war: static final int MAX_FAILS = 11;
-    // jetzt: pro-Instanz konfigurierbar
     private int maxFails = 11;
 
     // === Attribute ===
@@ -61,12 +59,10 @@ public class Game {
     public int getMaxFails() { return maxFails; }
 
     public void setMaxFails(int newMax) {
-        // simple bounds, feel free to tweak
         if (newMax < 1) newMax = 1;
-        if (newMax > 20) newMax = 20;
+        if (newMax > 11) newMax = 11;
         this.maxFails = newMax;
 
-        // falls man mitten im Spiel erhöht/verringert:
         if (fails > maxFails) fails = maxFails;
     }
 
