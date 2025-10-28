@@ -2,9 +2,12 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicButtonUI;
 import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.net.URL;
 
 public class HangmanForm {
+    // === Panels & GUI-Komponenten ===
     private JPanel MainPanel;
     private JPanel GamePanel;
     private JPanel LetterPanel;
@@ -19,15 +22,18 @@ public class HangmanForm {
     private JLabel wordLbl;
     private JLabel failLbl;
 
-    // ==== Game ====
+    // === Spiel-Logik ===
     private final Game game = new Game();
 
-    // ==== Image ====
+    // === Bildanzeige ===
     private JLabel imageLbl;
     private ImageIcon currentRawIcon;
     private int picCounter = PIC_MIN;
 
-    // ==== Theme (unverändert) ====
+    // Mapping-Array
+    private int[] frameByFail;
+
+    // === Farben  ===
     private static final Color KEY_FG       = new Color(255, 255, 255);
     private static final Color KEY_BG       = new Color(90, 74, 69);
     private static final Color KEY_BG_HOVER = new Color(106, 88, 82);
@@ -37,31 +43,32 @@ public class HangmanForm {
 
     private static final Color IMG_BG = new Color(243, 242, 238);
 
-    // ==== Layout- & Bild-Konstanten (unverändert) ====
+    // === Bild-Konstanten ===
     private static final int PIC_MIN = 1;
-    private static final int PIC_MAX = 10;
+    private static final int PIC_MAX = 11;
     private static final String IMG_FMT = "/Image/hangman%d.jpeg";
     private static final int IMG_PADDING = 8;
 
-    // ==== Keyboard Layout (gleiches „Look & Feel“) ====
+    // === Keyboard Layout  ===
     private static final String[] KEY_ROWS = {"ABCDEFG", "HIJKLMN", "OPQRSTU", "VWXYZ"};
     private static final Dimension KEY_SIZE = new Dimension(36, 28);
     private static final int KEY_GAP = 6;
     private static final int KEY_ARC = 10;
 
     public HangmanForm() {
-        // === Bildbereich ===
+        // === Bildbereich einrichten ===
         ImagePanel.setLayout(new BorderLayout());
         ImagePanel.setPreferredSize(new Dimension(250, 250));
         ImagePanel.setBackground(IMG_BG);
 
+        // JLabel für das Hangman-Bild
         imageLbl = new JLabel("", SwingConstants.CENTER);
         imageLbl.setOpaque(true);
         imageLbl.setBackground(IMG_BG);
         imageLbl.setBorder(new EmptyBorder(IMG_PADDING, IMG_PADDING, IMG_PADDING, IMG_PADDING));
         ImagePanel.add(imageLbl, BorderLayout.CENTER);
 
-        // === Header / Toolbar ===
+        // === Toolbar ===
         Menu.setFloatable(false);
         Menu.setRollover(true);
         for (JButton b : new JButton[]{restartBtn, settingsBtn}) {
@@ -74,48 +81,70 @@ public class HangmanForm {
         HeaderPanel.setLayout(new BorderLayout());
         HeaderPanel.add(Menu, BorderLayout.NORTH);
 
-        // === Initialstatus & Bild ===
+        // === Startstatus ===
         updateStatus();
-        loadRaw(picCounter);
+        recomputeFrameMap();
+        loadRaw(frameByFail[0]);
         fitImageToCard();
-        ImagePanel.addComponentListener(new java.awt.event.ComponentAdapter() {
-            @Override public void componentResized(java.awt.event.ComponentEvent e) {
+
+        // Wenn Fenstergröße geändert wird -> Bild neu skalieren
+        ImagePanel.addComponentListener(new ComponentAdapter() {
+            @Override public void componentResized(ComponentEvent e) {
                 fitImageToCard();
             }
         });
 
-        // === Keyboard bauen ===
+        // === Tastatur aufbauen ===
         buildKeyboard();
     }
 
-    // ======= Actions =======
+    // === Bildzuordnung je nach Fehleranzahl ===
+    private void recomputeFrameMap() {
+        int mf = Math.max(1, game.getMaxFails());
+        frameByFail = new int[mf + 1];
+        for (int f = 0; f <= mf; f++) {
+            double t = (double) f / mf;
+
+            int idx = (int) Math.round(PIC_MIN + t * (PIC_MAX - PIC_MIN));
+            idx = Math.max(PIC_MIN, Math.min(PIC_MAX, idx));
+            frameByFail[f] = idx;
+        }
+    }
+
+    // === Aktionen ===
     private void restartGame() {
-        game.reset();
+        game.reset();                   // neues Wort, Fehler = 0
         updateStatus();
-        loadRaw(PIC_MIN);
+        recomputeFrameMap();            // neu berechnen, falls maxFails geändert wurde
+        loadRaw(frameByFail[0]);        // wieder Startbild
         fitImageToCard();
-        buildKeyboard(); // alle Tasten wieder aktivieren
+        buildKeyboard();                // Buchstaben wieder aktivieren
     }
 
     private void openSettings() {
         Window owner = SwingUtilities.getWindowAncestor(MainPanel);
         Settings dlg = new Settings(owner, game.getMaxFails(), newMax -> {
-            game.setMaxFails(newMax);
+            game.setMaxFails(newMax);     // neuen Wert übernehmen
             updateStatus();
-            // optional: restartGame();
+            recomputeFrameMap();          // Bilder neu anpassen
+            int f = Math.min(game.getFails(), frameByFail.length - 1);
+            loadRaw(frameByFail[f]);      // richtiges Bild laden
+            fitImageToCard();
         });
         dlg.setVisible(true);
     }
 
     private void handleGuess(char letter) {
+        // wird ausgeführt, wenn ein Buchstabe gedrückt wird
         boolean correct = game.guessLetter(letter);
         updateStatus();
 
-        // Bildschritt: (fails + 1) im gültigen Bereich halten
-        int idx = Math.min(PIC_MAX, Math.max(PIC_MIN, game.getFails() + 1));
-        loadRaw(idx);
+        // Bild passend zum Fehlerstand anzeigen
+        int f = Math.min(game.getFails(), frameByFail.length - 1);
+        loadRaw(frameByFail[f]);
         fitImageToCard();
 
+        // Wenn Spiel vorbei ist -> Buttons deaktivieren + Message zeigen
         if (game.isGameOver()) {
             disableAllLetterButtons();
             JOptionPane.showMessageDialog(
@@ -127,14 +156,15 @@ public class HangmanForm {
         }
     }
 
-    // ======= Status & Bild =======
+    // === Statusanzeige (Wort + Fehlversuche) ===
     private void updateStatus() {
         wordLbl.setText(game.getGuessedWord());
         failLbl.setText("Fehler: " + game.getFails() + " / " + game.getMaxFails());
     }
 
+    // === Bild laden ===
     private void loadRaw(int index) {
-        // Wrap-around (unverändert)
+        // Sicherheitscheck
         if (index < PIC_MIN) index = PIC_MAX;
         if (index > PIC_MAX) index = PIC_MIN;
         picCounter = index;
@@ -143,6 +173,7 @@ public class HangmanForm {
         URL url = getClass().getResource(path);
 
         if (url == null) {
+            // Wenn kein Bild gefunden
             currentRawIcon = null;
             imageLbl.setIcon(null);
             imageLbl.setText("Bild fehlt: " + path);
@@ -152,6 +183,7 @@ public class HangmanForm {
         imageLbl.setText(null);
     }
 
+    // === Bildgröße an Panel anpassen ===
     private void fitImageToCard() {
         if (currentRawIcon == null) return;
 
@@ -161,6 +193,7 @@ public class HangmanForm {
         int imgW = currentRawIcon.getIconWidth();
         int imgH = currentRawIcon.getIconHeight();
 
+        // Verhältnis beibehalten -> keine Verzerrung
         double scale = Math.min(panelW / (double) imgW, panelH / (double) imgH);
         int w = (int) Math.max(1, Math.round(imgW * scale));
         int h = (int) Math.max(1, Math.round(imgH * scale));
@@ -172,7 +205,7 @@ public class HangmanForm {
         imageLbl.setVerticalAlignment(SwingConstants.CENTER);
     }
 
-    // ======= Keyboard =======
+    // === Tastatur zeichnen ===
     private void buildKeyboard() {
         LetterPanel.removeAll();
         LetterPanel.setLayout(new BoxLayout(LetterPanel, BoxLayout.Y_AXIS));
@@ -189,13 +222,14 @@ public class HangmanForm {
             }
 
             LetterPanel.add(row);
-            LetterPanel.add(Box.createVerticalStrut(KEY_GAP));
+            LetterPanel.add(Box.createVerticalStrut(KEY_GAP)); // kleiner Abstand
         }
 
         LetterPanel.revalidate();
         LetterPanel.repaint();
     }
 
+    // === einzelne Taste erstellen ===
     private JButton makeKeyButton(char ch) {
         JButton b = new JButton(String.valueOf(Character.toUpperCase(ch)));
         b.setFocusable(false);
@@ -212,12 +246,13 @@ public class HangmanForm {
         b.addPropertyChangeListener("enabled", evt -> b.repaint());
 
         b.addActionListener(e -> {
-            b.setEnabled(false);
-            handleGuess(ch);
+            b.setEnabled(false); // Taste nach Klick deaktivieren
+            handleGuess(ch);     // an Spiel-Logik weitergeben
         });
         return b;
     }
 
+    // === deaktiviert alle Buchstaben nach Spielende ===
     private void disableAllLetterButtons() {
         for (Component c : LetterPanel.getComponents()) {
             if (c instanceof JPanel) {
@@ -230,7 +265,7 @@ public class HangmanForm {
         }
     }
 
-    // ======= Custom Button UI =======
+    // === Custom Look für die Buchstaben-Buttons ===
     private class KeyButtonUI extends BasicButtonUI {
         @Override public void paint(Graphics g, JComponent c) {
             AbstractButton ab = (AbstractButton) c;
@@ -257,5 +292,6 @@ public class HangmanForm {
         }
     }
 
+    // Zugriff auf das Hauptpanel
     public JPanel getMainPanel() { return MainPanel; }
 }

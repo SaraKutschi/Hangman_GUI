@@ -4,6 +4,7 @@ import java.awt.*;
 import java.util.function.IntConsumer;
 
 public class Settings extends JDialog {
+    // === GUI-Komponenten ===
     private JPanel SettingsPanel;
     private JLabel settingsLbl;
     private JLabel errorsLbl;
@@ -11,6 +12,7 @@ public class Settings extends JDialog {
     private JButton okBtn;
     private JButton cancelBtn;
 
+    // === Konstruktor ===
     public Settings(Window owner, int current, IntConsumer onSave) {
         super(owner, "Einstellungen", ModalityType.APPLICATION_MODAL);
         buildUI(current);
@@ -20,6 +22,7 @@ public class Settings extends JDialog {
             if (sel != null && onSave != null) onSave.accept(sel);
             dispose();
         });
+
         cancelBtn.addActionListener(e -> dispose());
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -27,30 +30,36 @@ public class Settings extends JDialog {
         setLocationRelativeTo(owner);
     }
 
+    // === Oberfläche gestalten ===
     private void buildUI(int current) {
+
         SettingsPanel = new JPanel(new GridBagLayout());
         SettingsPanel.setBorder(new EmptyBorder(16, 16, 16, 16));
-        SettingsPanel.setBackground(new Color(250, 240, 235)); // passt zum Theme
+        SettingsPanel.setBackground(new Color(250, 240, 235));
 
         GridBagConstraints g = new GridBagConstraints();
         g.insets = new Insets(8, 8, 8, 8);
         g.anchor = GridBagConstraints.WEST;
 
+        // Titel-Label
         settingsLbl = new JLabel("Einstellungen");
         settingsLbl.setFont(settingsLbl.getFont().deriveFont(Font.BOLD, 16f));
         g.gridx = 0; g.gridy = 0; g.gridwidth = 2;
         SettingsPanel.add(settingsLbl, g);
 
+        // Label für Fehler-Limit
         errorsLbl = new JLabel("Fehler-Limit:");
         g.gridx = 0; g.gridy = 1; g.gridwidth = 1;
         SettingsPanel.add(errorsLbl, g);
 
+        // Dropdown für Auswahl
         errorsCb = new JComboBox<>();
         for (int i = 6; i <= 11; i++) errorsCb.addItem(i);
         errorsCb.setSelectedItem(current);
         g.gridx = 1; g.gridy = 1;
         SettingsPanel.add(errorsCb, g);
 
+        // === Button-Bereich ===
         JPanel btns = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         btns.setOpaque(false);
         cancelBtn = new JButton("Abbrechen");

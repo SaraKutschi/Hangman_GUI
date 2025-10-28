@@ -21,10 +21,12 @@ public class Game {
     }
 
     // === Methoden ===
+
     public boolean guessLetter(char c) {
         c = Character.toUpperCase(c);
         boolean found = false;
 
+        // geht jeden Buchstaben des Wortes durch
         for (int i = 0; i < word.length(); i++) {
             if (word.charAt(i) == c) {
                 guessed.setCharAt(i, c);
@@ -54,10 +56,11 @@ public class Game {
         return guessed.toString().equals(word);
     }
 
+    // Getter für Fehler & Limit
     public int getFails() { return fails; }
-
     public int getMaxFails() { return maxFails; }
 
+    // setzt die maximale Fehleranzahl (z. B. aus den Settings)
     public void setMaxFails(int newMax) {
         if (newMax < 1) newMax = 1;
         if (newMax > 11) newMax = 11;
