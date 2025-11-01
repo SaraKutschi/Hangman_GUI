@@ -11,8 +11,7 @@
     </properties>
     <border type="none"/>
     <children>
-      <grid id="666f1" binding="HeaderPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="5" vgap="5">
-        <margin top="5" left="5" bottom="5" right="5"/>
+      <grid id="666f1" binding="HeaderPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <minimum-size width="50" height="-1"/>
@@ -27,12 +26,11 @@
         <border type="none"/>
         <children>
           <component id="1bec4" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
+            <constraints border-constraint="Center"/>
             <properties>
               <font name="Arial Black" size="22" style="1"/>
               <foreground color="-263169"/>
+              <horizontalAlignment value="0"/>
               <text value="Hangman"/>
             </properties>
           </component>
@@ -76,11 +74,11 @@
               </component>
             </children>
           </grid>
-          <grid id="c0110" binding="ImagePanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="5" vgap="5">
-            <margin top="5" left="5" bottom="5" right="5"/>
+          <grid id="c0110" binding="ImagePanel" layout-manager="BorderLayout" hgap="0" vgap="0">
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="300" height="200"/>
+                <minimum-size width="250" height="250"/>
+                <preferred-size width="250" height="250"/>
               </grid>
             </constraints>
             <properties>
@@ -93,15 +91,11 @@
             </border>
             <children>
               <component id="e5c68" class="javax.swing.JLabel" binding="imageLbl">
-                <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
-                    <minimum-size width="-1" height="300"/>
-                    <maximum-size width="300" height="300"/>
-                  </grid>
-                </constraints>
+                <constraints border-constraint="Center"/>
                 <properties>
                   <background color="-723985"/>
                   <foreground color="-723985"/>
+                  <opaque value="true"/>
                   <text value=""/>
                 </properties>
               </component>
@@ -519,7 +513,13 @@
             <preferred-size width="-1" height="20"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <floatable value="false"/>
+          <rollover value="true"/>
+        </properties>
+        <clientProperties>
+          <JToolBar.isRollover class="java.lang.Boolean" value="true"/>
+        </clientProperties>
         <border type="none"/>
         <children>
           <component id="34118" class="javax.swing.JButton" binding="settingsBtn">
